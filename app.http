@@ -8,7 +8,7 @@ POST {{baseurl}}/motivations/generate
 Content-Type: application/json
 
 {
-  "theme": "belajar",
+  "theme": "messi",
   "total": 5
 }
 ###

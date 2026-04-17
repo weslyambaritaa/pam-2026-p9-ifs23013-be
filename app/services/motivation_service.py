@@ -1,3 +1,4 @@
+# app/services/motivation_service.py
 from app.extensions import SessionLocal
 from app.models.motivation import Motivation
 from app.models.request_log import RequestLog
@@ -8,8 +9,9 @@ def create_motivations(theme: str, total: int):
     session = SessionLocal()
 
     try:
+        # Ubah prompt ke topik sepak bola
         prompt = f"""
-        Dalam format JSON, buat {total} kata-kata motivasi dengan tema "{theme}".
+        Dalam format JSON, buat {total} fakta menarik atau informasi seputar sepak bola dengan tema "{theme}".
         Format:
         {{
             "motivations": [
@@ -21,7 +23,6 @@ def create_motivations(theme: str, total: int):
         result = generate_from_llm(prompt)
         motivations = parse_llm_response(result)
 
-        # save request log
         req_log = RequestLog(theme=theme)
         session.add(req_log)
         session.commit()
@@ -48,6 +49,7 @@ def create_motivations(theme: str, total: int):
 
     finally:
         session.close()
+
 
 
 def get_all_motivations(page: int = 1, per_page: int = 100):
