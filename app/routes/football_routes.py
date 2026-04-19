@@ -1,23 +1,23 @@
 from flask import Blueprint, request, jsonify
-from app.services.motivation_service import (
-    create_motivations,
-    get_all_motivations
+from app.services.football_service import (
+    create_football_clubs,
+    get_all_footballs
 )
 
-motivation_bp = Blueprint("motivation", __name__)
+football_bp = Blueprint("football", __name__)
 
-@motivation_bp.route("/", methods=["GET"])
+@football_bp.route("/", methods=["GET"])
 def index():
     return "API telah berjalan! Dibuat oleh Abdullah Ubaid"
     
 
-@motivation_bp.route("/motivations/generate", methods=["POST"])
+@football_bp.route("/footballs/generate", methods=["POST"])
 def generate():
     data = request.get_json()
-    theme = data.get("theme")
+    league = data.get("league") # Mengganti 'league' menjadi 'league'
     total = data.get("total")
 
-    if not theme:
+    if not league:
         return jsonify({"error": "Theme is required"}), 400
     
     if not total:
@@ -30,10 +30,10 @@ def generate():
         return jsonify({"error": "Total maksimal harus 10"}), 400
 
     try:
-        result = create_motivations(theme, total)
+        result = create_football_clubs(league, total)
 
         return jsonify({
-            "theme": theme,
+            "league": league,
             "total": len(result),
             "data": result
         })
@@ -42,11 +42,11 @@ def generate():
         return jsonify({"error": str(e)}), 500
 
 
-@motivation_bp.route("/motivations", methods=["GET"])
+@football_bp.route("/footballs", methods=["GET"])
 def get_all():
     page = request.args.get("page", default=1, type=int)
     per_page = request.args.get("per_page", default=100, type=int)
 
-    data = get_all_motivations(page=page, per_page=per_page)
+    data = get_all_footballs(page=page, per_page=per_page)
 
     return jsonify(data)

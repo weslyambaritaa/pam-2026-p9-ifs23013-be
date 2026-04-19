@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from app.extensions import Base, engine
-from app.routes.motivation_routes import motivation_bp
+from app.routes.football_routes import football_bp
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +13,6 @@ def create_app():
     Base.metadata.create_all(bind=engine)
 
     # register blueprint
-    app.register_blueprint(motivation_bp)
+    app.register_blueprint(football_bp)
 
     return app
