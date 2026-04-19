@@ -39,11 +39,6 @@ def generate():
         })
 
     except Exception as e:
-        print("\n" + "="*50)
-        print("🚨 TERJADI ERROR SAAT GENERATE 🚨")
-        traceback.print_exc()  # Ini akan mencetak detail baris kode yang error ke terminal!
-        print("="*50 + "\n")
-        
         return jsonify({"error": str(e)}), 500
 
 
