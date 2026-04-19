@@ -9,11 +9,12 @@ def create_football_clubs(league: str, total: int):
 
     try:
         prompt = f"""
-        Dalam format JSON, buat {total} daftar klub sepak bola dari liga "{league}".
+        Berikan jawaban dalam format JSON saja.
+        Daftar {total} klub sepak bola dari liga "{league}".
         Format:
         {{
             "clubs": [
-                {{"name": "..."}}
+                {{"name": "Nama Klub"}}
             ]
         }}
         """
