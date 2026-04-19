@@ -2,14 +2,14 @@
 ## Global Variables
 @baseurl=http://127.0.0.1:5000
 
-## Generate Motivation
-# @name PostGenerateMotivation
-POST {{baseurl}}/motivations/generate
+## Generate Football Clubs
+# @name PostGenerateFootballs
+POST {{baseurl}}/footballs/generate
 Content-Type: application/json
 
 {
-  "theme": "belajar",
-  "total": 5
+  "league": "Premier League",
+  "total": 3
 }
 ###
 
@@ -27,9 +27,9 @@ Content-Type: application/json
 }
 ###
 
-## Get Motivation
-# @name GetMotivations
-GET {{baseurl}}/motivations?page=1&per_page=10
+## Get Football Clubs
+# @name GetFootballs
+GET {{baseurl}}/footballs?page=1&per_page=10
 Content-Type: application/json
 ###
 

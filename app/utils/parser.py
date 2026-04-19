@@ -10,7 +10,7 @@ def parse_llm_response(result):
 
         parsed = json.loads(content)
 
-        return parsed.get("motivations", [])
+        return parsed.get("footballs", [])
 
     except Exception as e:
         raise Exception(f"Invalid JSON from LLM: {str(e)}")

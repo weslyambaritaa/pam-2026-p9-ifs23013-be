@@ -21,22 +21,25 @@ def create_football_clubs(league: str, total: int):
         result = generate_from_llm(prompt)
         footballs = parse_llm_response(result)
 
-        # save request log
-        req_log = RequestLog(theme=theme)
+        # Ganti 'theme' menjadi 'league' saat menyimpan log
+        # Asumsi model RequestLog masih menggunakan kolom 'theme'
+        req_log = RequestLog(theme=league) 
         session.add(req_log)
         session.commit()
 
         saved = []
 
         for item in footballs:
-            text = item.get("text")
+            # Ambil "name" dari JSON, bukan "text"
+            club_name = item.get("name") 
 
             m = Football(
-                text=text,
+                name=club_name,   # Sesuaikan dengan model Football
+                league=league,    # Simpan juga data liganya
                 request_id=req_log.id
             )
             session.add(m)
-            saved.append(text)
+            saved.append(club_name)
 
         session.commit()
 
@@ -69,7 +72,8 @@ def get_all_footballs(page: int = 1, per_page: int = 100):
         result = [
             {
                 "id": m.id,
-                "text": m.text,
+                "name": m.name,       # Diubah dari m.text
+                "league": m.league,   # Tambahkan kembalian liga
                 "created_at": m.created_at.isoformat()
             }
             for m in data

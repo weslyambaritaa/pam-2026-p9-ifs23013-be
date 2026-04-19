@@ -18,7 +18,7 @@ def generate():
     total = data.get("total")
 
     if not league:
-        return jsonify({"error": "Theme is required"}), 400
+        return jsonify({"error": "League is required"}), 400
     
     if not total:
         return jsonify({"error": "Total is required"}), 400
